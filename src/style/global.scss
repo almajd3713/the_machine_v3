@@ -1,0 +1,19 @@
+:root {
+  --color-1: #008000;
+  --color-1-filter: invert(19%) sepia(99%) saturate(6156%) hue-rotate(121deg) brightness(99%) contrast(104%);
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-1);
+}
+
+html {
+  min-height: 100vh;
+  font-size: 62.5%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body {
+  background-color: black;
+}

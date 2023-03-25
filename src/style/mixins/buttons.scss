@@ -1,0 +1,24 @@
+
+@mixin button($bgcolor: green, $color: black, $round: false) {
+  button {
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    transition: all .3s;
+    border: none;
+    outline: none;
+    background-color: $bgcolor;
+    color: $color;
+    font-size: 2rem;
+    @if($round) {border-radius: 1rem;};
+  }
+  button:hover {
+    background-color: lighten($bgcolor, 6);
+    color: lighten($color, 6);
+    transform: translateY(-3px);
+  }
+  button:active {
+    background-color: lighten($bgcolor, 3);
+    color: lighten($color, 3);
+    transform: translateY(-1.5px);
+  }
+}
