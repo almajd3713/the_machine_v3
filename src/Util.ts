@@ -70,7 +70,12 @@ function stringToHTMLTree(treeStr: string) {
   return propTreeGen(div)
 }
 
+let sleep = async(ms: number) => new Promise((resolve) => setTimeout(() => {
+  resolve(true)
+}, ms))
+
 export default {
   createNode,
-  stringToHTMLTree
+  stringToHTMLTree,
+  sleep
 }

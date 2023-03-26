@@ -1,13 +1,15 @@
 import Prototypes from "./Prototypes"
 import Util from "./Util";
 import startup from "./startup"
-setTimeout(startup, 500);
+
+startup()
 
 let res1 = new Prototypes.Resource({
   name: "Wood",
   id: "wood",
-  icon: "/wood.svg",
+  icon: "/svg/wood.svg",
   isCountable: true,
+  baseTime: 5000,
   mineable: true
 })
 

@@ -1,7 +1,7 @@
 import type { Resource } from "./Prototypes/Resource"
 
-let globals = {
-  resourceContainer: document.querySelector("#resourceContainer"),
+let globals: {[key:string]: any} = {
+  resourceContainer: null as HTMLElement | null,
   resourceList: [] as Resource[]
 }
 setInterval(() => {

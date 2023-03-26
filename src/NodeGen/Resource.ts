@@ -10,9 +10,10 @@ const ResourceProps: createNodeProps = Util.stringToHTMLTree(`
       Amount: <span class="resCount">0</span>
     </div>
     <div class="resCountText">
-      PPS: <span class="resCount">0</span>
+      PPS: <span class="resCount">0/s</span>
     </div>
     <button>Generate</button>
+
   </div>
 `)
 
