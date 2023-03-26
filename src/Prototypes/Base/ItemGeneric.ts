@@ -20,5 +20,5 @@ export class ItemGeneric {
     this.isCountable = obj.isCountable;
     if(this.isCountable) this.count = obj.count || 0; 
   }
-
+  
 }

@@ -1,6 +1,6 @@
 
 import globals from "../globals";
-import ResourceProps from "../NodeGen/Resource";
+import ResourceProps from "../NodeGen/instances/Resource";
 import Util from "../Util";
 import {ItemGeneric, ItemGenericConstructor} from "./Base/ItemGeneric";
 
@@ -46,7 +46,6 @@ export class Resource extends ItemGeneric {
     if(this.mineable) {
       this.baseTime = obj.baseTime || 1000;
       this.htmlDiv = Util.createNode(ResourceProps)
-      globals.resourceContainer?.appendChild(this.htmlDiv)
       this.initHTML()
       this.htmlElements.genBtn.addEventListener("click", () => {
         this.generate()

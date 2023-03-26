@@ -1,7 +1,8 @@
 import globals from "./globals"
+import InventoryTabProps from "./NodeGen/InventoryTab"
 import Util from "./Util"
 
-export default () => {
+export const preStartup = () => {
   setTimeout(() => document.querySelector("head")!.append(Util.createNode({
     tag: "style",
     textContent: `
@@ -24,20 +25,38 @@ export default () => {
   let containers = containerGen()
   tabs.forEach((tab, i) => tab.appendChild(containers[i]))
 
+  
+  // Setting starting page
+  tabBtns[1].click()
+  
+  // Generating Tabs content
+  console.log(InventoryTabProps)
+  containers[1].appendChild(Util.createNode(InventoryTabProps))
+  
   // Setting some globals
   containers.forEach((container, i) => {
     globals[container.id] = containers[i]
   })
+  globals.inventoryListContainer = containers[1].querySelector(".itemDisplayTabInventory")
+  let desContainer = containers[1].querySelector('.itemDescriptionTabInventory')
+  globals.inventoryDescElements = {
+    name: desContainer!.querySelector('.name'),
+    icon: desContainer!.querySelector('img'),
+    description: desContainer!.querySelector('.description'),
+    durability: desContainer!.querySelector('.durability')
+  };
 
-  // Setting starting page
-  tabBtns[1].click()
+  // Inventory desc starts without being displayed
+  (desContainer!.children[0] as HTMLElement).style.opacity = '0'
   
-  //@ts-ignore
-  window.containers = containers
+  globals.Loader("resources")
 }
-
+export const postStartup = () => {
+  globals.Loader("resources")
+  globals.Loader("inventory")
+}
 const containerGen = () => {
-  let containerStrs = ["resource", "crafting", "map"]
+  let containerStrs = ["resource", "inventory", "map"]
   let containerNodes = containerStrs.map(container => Util.createNode({id: `${container}Container`}))
   return containerNodes
 }

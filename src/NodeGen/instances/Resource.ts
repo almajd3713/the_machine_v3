@@ -1,4 +1,4 @@
-import Util, { createNodeProps } from "../Util";
+import Util, { createNodeProps } from "../../Util";
 
 const ResourceProps: createNodeProps = Util.stringToHTMLTree(`
   <div class="resBlock">

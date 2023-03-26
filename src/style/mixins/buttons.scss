@@ -22,3 +22,14 @@
     transform: translateY(-1.5px);
   }
 }
+
+@mixin buttonInventory {
+  @include button(black, #008000);
+  button {
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #008000;
+    color: black;
+  }
+}
