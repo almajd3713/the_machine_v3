@@ -71,5 +71,8 @@ Startup.postStartup()
 
 
 
+
+
+
 //@ts-ignore
 window.Resource = Prototypes.Resource

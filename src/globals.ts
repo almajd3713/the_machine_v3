@@ -1,3 +1,4 @@
+import Dispatcher from "./Dispatcher";
 import { inventoryExtraProps } from "./NodeGen/inventoryExtra/crafting";
 import { Equipment, EquipmentInstance } from "./Prototypes/Equipment";
 import { Item, ItemInstance } from "./Prototypes/Item";
@@ -9,6 +10,7 @@ enum loadingType {
   resources, inventory, crafting
 }
 interface globalsInterface {
+  Dispatcher: typeof Dispatcher
   Loader: (type: loadingType) => void
   InventoryFirstClickChecker: () => void
   resourceContainer: HTMLElement | null
@@ -34,6 +36,7 @@ interface globalsInterface {
 }
 
 let globals: globalsInterface = {
+  Dispatcher,
 
   resourceContainer: null,
   resourceList: [],
@@ -89,5 +92,9 @@ setInterval(() => {
     }
   })
 }, 2000);
+
+//@ts-ignore
+window.Dispatcher = Dispatcher
+
 
 export default globals
