@@ -1,7 +1,7 @@
-import Util, { createNodeProps } from "../Util";
+import Util from "../Util";
 
 
-let InventoryTabProps: createNodeProps = Util.stringToHTMLTree(`
+let InventoryTabProps = Util.stringToHTMLTree(`
   <div class="inventoryGenWrapper">
     <div class="btnContainerInventory">
       <button class="inventoryBtn">Inventory</button>
@@ -20,7 +20,7 @@ let InventoryTabProps: createNodeProps = Util.stringToHTMLTree(`
             <div class="description"></div>
             </div>
           <div class="line-break"></div>
-          <div class="durability"></div>
+          <div class="extra"></div>
         </div>
       </div>
     </div>

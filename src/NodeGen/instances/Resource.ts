@@ -1,6 +1,6 @@
-import Util, { createNodeProps } from "../../Util";
+import Util from "../../Util";
 
-const ResourceProps: createNodeProps = Util.stringToHTMLTree(`
+const ResourceProps = Util.stringToHTMLTree(`
   <div class="resBlock">
     <div class="resIcon">
       <img src="" alt="">

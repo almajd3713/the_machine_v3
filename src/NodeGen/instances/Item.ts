@@ -1,6 +1,6 @@
-import Util, {createNodeProps} from "../../Util";
+import Util from "../../Util";
 
-let ItemProps: createNodeProps = Util.stringToHTMLTree(`
+let ItemProps = Util.stringToHTMLTree(`
   <div class="inventoryItem">
     <div class="icon">
       <img src="">

@@ -16,7 +16,7 @@ export class Equipment extends Item {
     this.maxDurability = obj.maxDurability
     this.durability = this.maxDurability
     this.isCountable = false
-    globals.EquipmentList.push
+    
   }
   get durability() {
     return this._durability[0]
@@ -57,15 +57,13 @@ export class EquipmentInstance extends Equipment {
     globals.inventoryList.push(this)
     this.initHTML()
     this.htmlDiv.addEventListener("click", _ => {
-      if (globals.hasNotClickedInventoryItem) {
-        (globals.inventoryDescElements.durability!.parentElement as HTMLElement).style.opacity = '1'
-        globals.hasNotClickedInventoryItem = false
-      }
+      globals.InventoryFirstClickChecker()
       globals.inventoryDescElements.name!.textContent = this.name
       globals.inventoryDescElements.icon!.src = this.icon
       globals.inventoryDescElements.description!.textContent = this.description
-      globals.inventoryDescElements.durability!.textContent = `Durability: ${this.durability}/${this.maxDurability}`
+      globals.inventoryDescElements.extra!.textContent = `Durability: ${this.durability}/${this.maxDurability}`
     })
+    
   }
   private initHTML() {
     this.equpimentElements.name = this.htmlDiv.querySelector(".name")!

@@ -3,9 +3,11 @@ import globals from "../globals";
 import ItemProps from "../NodeGen/instances/Item";
 import Util from "../Util";
 import { ItemGeneric, ItemGenericConstructor } from "./Base/ItemGeneric";
+import { Recipe, RecipeConstructor } from "./Recipe";
 
 export interface ItemConstructor extends ItemGenericConstructor {
   description?: string
+  recipe?: RecipeConstructor
 }
 
 export interface itemElementsInterface {
@@ -15,10 +17,16 @@ export interface itemElementsInterface {
 
 export class Item extends ItemGeneric {
   description: string
+  recipe?: Recipe
   constructor(obj: ItemConstructor) {
     super(obj);
     this.description = obj.description || "";
     globals.itemList.push(this)
+
+    if(obj.recipe) {
+      let recipe = new Recipe(obj.recipe)
+      this.recipe = recipe
+    }
   }
 
   create() {
@@ -44,16 +52,14 @@ export class ItemInstance extends Item {
     globals.inventoryList.push(this)
     this.initHTML()
     this.htmlDiv.addEventListener("click", _ => {
-      if (globals.hasNotClickedInventoryItem) {
-        (globals.inventoryDescElements.durability!.parentElement as HTMLElement).style.opacity = '1'
-        globals.hasNotClickedInventoryItem = false
-      }
+      globals.InventoryFirstClickChecker()
       globals.inventoryDescElements.name!.textContent = this.name
       globals.inventoryDescElements.icon!.src = this.icon
       globals.inventoryDescElements.description!.textContent = this.description
-      if (globals.inventoryDescElements.durability!.textContent) 
-          globals.inventoryDescElements.durability!.textContent = ""
+      if (globals.inventoryDescElements.extra!.textContent) 
+          globals.inventoryDescElements.extra!.textContent = ""
     })
+
   }
   private initHTML() {
     this.itemElements.name = this.htmlDiv.querySelector(".name")!

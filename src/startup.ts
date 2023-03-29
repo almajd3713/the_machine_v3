@@ -2,6 +2,8 @@ import globals from "./globals"
 import InventoryTabProps from "./NodeGen/InventoryTab"
 import Util from "./Util"
 
+
+
 export const preStartup = () => {
   setTimeout(() => document.querySelector("head")!.append(Util.createNode({
     tag: "style",
@@ -30,7 +32,6 @@ export const preStartup = () => {
   tabBtns[1].click()
   
   // Generating Tabs content
-  console.log(InventoryTabProps)
   containers[1].appendChild(Util.createNode(InventoryTabProps))
   
   // Setting some globals
@@ -43,20 +44,40 @@ export const preStartup = () => {
     name: desContainer!.querySelector('.name'),
     icon: desContainer!.querySelector('img'),
     description: desContainer!.querySelector('.description'),
-    durability: desContainer!.querySelector('.durability')
+    extra: desContainer!.querySelector('.extra')
   };
 
   // Inventory desc starts without being displayed
   (desContainer!.children[0] as HTMLElement).style.opacity = '0'
+
+  // Inventory/Crafting panel switcher
+  let inventoryBtns = [...document.querySelector('.btnContainerInventory')!.children]
+  inventoryBtns.forEach((btn, i) => btn.addEventListener('click', _ => globals.Loader(i + 1)))
   
-  globals.Loader("resources")
 }
 export const postStartup = () => {
-  globals.Loader("resources")
-  globals.Loader("inventory")
+  globals.Loader(0)
+  globals.Loader(1)
+  listFilterer()
+
+
+  //@ts-ignore
+  window.globals = globals
 }
 const containerGen = () => {
   let containerStrs = ["resource", "inventory", "map"]
   let containerNodes = containerStrs.map(container => Util.createNode({id: `${container}Container`}))
   return containerNodes
+}
+
+const listFilterer = () => {
+  globals.itemList = globals.itemList.filter(item => item.constructor.name.match(/\w+(Instance)/))
+  // globals.equipmentList = globals.equipmentList.filter(equipment => {
+  //   if (
+  //     equipment instanceof EquipmentInstance ||
+  //     equipment instanceof ItemInstance ||
+  //     equipment instanceof Item
+  //   ) return false
+  //   else return true
+  // })
 }

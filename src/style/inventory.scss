@@ -57,31 +57,33 @@
     }
     .itemDescriptionTabInventory {
       border-left-width: 1px;
-      display: flex;
-      flex-wrap: wrap;
-      align-content: flex-start;
       padding: 5rem;
-      .icon {
-        height: 30%;
-        aspect-ratio: 1;
-        img {
-          width: 50%;
+      .itemDescWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        .icon {
+          height: 30%;
           aspect-ratio: 1;
-          filter: var(--color-1-filter);
+          img {
+            width: 50%;
+            aspect-ratio: 1;
+            filter: var(--color-1-filter);
+          }
         }
-      }
-      .details {
-        margin-bottom: 2rem;
-        .name {
-          font-size: 3rem;
+        .details {
           margin-bottom: 2rem;
+          .name {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+          }
+          .description {
+            font-size: 1.75rem;
+          }
         }
-        .description {
-          font-size: 1.75rem;
+        .extra {
+          font-size: 1.5rem;
         }
-      }
-      .durability {
-        font-size: 1.5rem;
       }
     }
   }

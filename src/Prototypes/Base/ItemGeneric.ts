@@ -1,3 +1,4 @@
+import globals from "../../globals";
 
 export interface ItemGenericConstructor {
   id: string;
@@ -16,7 +17,7 @@ export class ItemGeneric {
   constructor(obj: ItemGenericConstructor) {
     this.name = obj.name;
     this.id = obj.id;
-    this.icon = obj.icon || "";
+    this.icon = obj.icon || globals.nullIcon;
     this.isCountable = obj.isCountable;
     if(this.isCountable) this.count = obj.count || 0; 
   }
