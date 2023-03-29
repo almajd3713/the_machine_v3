@@ -19,8 +19,6 @@ let item2 = new Prototypes.Item({
   icon: '/svg/drill.svg',
   description: "An automated tool for mining. Very convenient eh?",
   recipe: {
-    name: "DRill",
-    id: "drill1",
     ingredients: ['pickaxe1', 'wood'],
     results: []
   }
@@ -29,6 +27,7 @@ let item2 = new Prototypes.Item({
 let item1 = new Prototypes.Equipment({
   name: "Stone Pickaxe",
   id: "pickaxe1",
+  icon: '/svg/pickaxe.svg',
   isCountable: true,
   count: 5,
   description: "A state of the art tool for the excavation of goods",

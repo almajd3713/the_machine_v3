@@ -7,7 +7,7 @@ import { Recipe, RecipeConstructor } from "./Recipe";
 
 export interface ItemConstructor extends ItemGenericConstructor {
   description?: string
-  recipe?: RecipeConstructor
+  recipe?: Partial<RecipeConstructor>
 }
 
 export interface itemElementsInterface {
@@ -24,7 +24,13 @@ export class Item extends ItemGeneric {
     globals.itemList.push(this)
 
     if(obj.recipe) {
-      let recipe = new Recipe(obj.recipe)
+      let recipe = new Recipe({
+        name: obj.recipe.name || this.name,
+        id: obj.recipe.id || this.id,
+        icon: obj.recipe.icon || this.icon,
+        ingredients: obj.recipe.ingredients || [],
+        results: obj.recipe.results || []
+      })
       this.recipe = recipe
     }
   }
@@ -56,9 +62,9 @@ export class ItemInstance extends Item {
       globals.inventoryDescElements.name!.textContent = this.name
       globals.inventoryDescElements.icon!.src = this.icon
       globals.inventoryDescElements.description!.textContent = this.description
-      if (globals.inventoryDescElements.extra!.textContent) 
-          globals.inventoryDescElements.extra!.textContent = ""
+      globals.Dispatcher.dispatch('switchInventoryView', 'inventory')
     })
+    
 
   }
   private initHTML() {

@@ -63,10 +63,11 @@
         flex-wrap: wrap;
         align-content: flex-start;
         .icon {
-          height: 30%;
+          height: 15rem;
+          margin-right: 2rem;
           aspect-ratio: 1;
           img {
-            width: 50%;
+            height: inherit;
             aspect-ratio: 1;
             filter: var(--color-1-filter);
           }

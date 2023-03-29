@@ -15,17 +15,16 @@ let InventoryTabProps = Util.stringToHTMLTree(`
           <div class="icon">
             <img src="" alt="">
           </div>
-          <div class="details">
-            <div class="name"></div>
-            <div class="description"></div>
-            </div>
-          <div class="line-break"></div>
-          <div class="extra"></div>
+          <div class="extra">
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 `)
+// < div class="line-break" > </div>
+
 
 
 export default InventoryTabProps

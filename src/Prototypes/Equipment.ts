@@ -1,5 +1,6 @@
 import globals from "../globals";
 import ItemProps from "../NodeGen/instances/Item";
+import inventoryExtras from "../NodeGen/inventoryExtras";
 import Util from "../Util";
 import { Item, ItemConstructor, itemElementsInterface } from "./Item";
 
@@ -61,7 +62,8 @@ export class EquipmentInstance extends Equipment {
       globals.inventoryDescElements.name!.textContent = this.name
       globals.inventoryDescElements.icon!.src = this.icon
       globals.inventoryDescElements.description!.textContent = this.description
-      globals.inventoryDescElements.extra!.textContent = `Durability: ${this.durability}/${this.maxDurability}`
+      inventoryExtras.equipment.querySelector('.durability')!.textContent = `Durability: ${this.durability}/${this.maxDurability}`
+      globals.Dispatcher.dispatch('switchInventoryView', 'equipment')
     })
     
   }

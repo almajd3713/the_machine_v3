@@ -1,5 +1,4 @@
 import Dispatcher from "./Dispatcher";
-import { inventoryExtraProps } from "./NodeGen/inventoryExtra/crafting";
 import { Equipment, EquipmentInstance } from "./Prototypes/Equipment";
 import { Item, ItemInstance } from "./Prototypes/Item";
 import { Recipe } from "./Prototypes/Recipe";
@@ -28,9 +27,6 @@ interface globalsInterface {
     icon: HTMLImageElement | null
     extra: HTMLElement | null
   },
-  inventoryExtras: {
-    crafting: HTMLElement
-  }
 
   [key: string]: any
 }
@@ -49,9 +45,6 @@ let globals: globalsInterface = {
     description: null,
     icon: null,
     extra: null
-  },
-  inventoryExtras: {
-    crafting: Util.createNode(inventoryExtraProps)
   },
   Loader(type) {
     let inventoryListChildren = [...this.inventoryListContainer!.children]
@@ -92,9 +85,6 @@ setInterval(() => {
     }
   })
 }, 2000);
-
-//@ts-ignore
-window.Dispatcher = Dispatcher
 
 
 export default globals

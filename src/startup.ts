@@ -1,4 +1,6 @@
+import Events from "./Events"
 import globals from "./globals"
+import inventoryExtras from "./NodeGen/inventoryExtras"
 import InventoryTabProps from "./NodeGen/InventoryTab"
 import Util from "./Util"
 
@@ -41,9 +43,9 @@ export const preStartup = () => {
   globals.inventoryListContainer = containers[1].querySelector(".itemDisplayTabInventory")
   let desContainer = containers[1].querySelector('.itemDescriptionTabInventory')
   globals.inventoryDescElements = {
-    name: desContainer!.querySelector('.name'),
+    name: inventoryExtras!.inventory.querySelector('.name'),
     icon: desContainer!.querySelector('img'),
-    description: desContainer!.querySelector('.description'),
+    description: inventoryExtras!.inventory.querySelector('.description'),
     extra: desContainer!.querySelector('.extra')
   };
 
@@ -60,6 +62,9 @@ export const postStartup = () => {
   globals.Loader(1)
   listFilterer()
 
+  globals.Dispatcher.dispatch('recipeInit')
+  Events()
+
 
   //@ts-ignore
   window.globals = globals
@@ -72,12 +77,4 @@ const containerGen = () => {
 
 const listFilterer = () => {
   globals.itemList = globals.itemList.filter(item => item.constructor.name.match(/\w+(Instance)/))
-  // globals.equipmentList = globals.equipmentList.filter(equipment => {
-  //   if (
-  //     equipment instanceof EquipmentInstance ||
-  //     equipment instanceof ItemInstance ||
-  //     equipment instanceof Item
-  //   ) return false
-  //   else return true
-  // })
 }
