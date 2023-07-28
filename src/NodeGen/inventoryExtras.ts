@@ -9,6 +9,8 @@ const inventory = Util.createNode(Util.stringToHTMLTree(`
 
 const crafting = Util.createNode(Util.stringToHTMLTree(`
   <div class="craftingCont">
+    <div class="currentCount"></div>
+    <div class="ingredientsTitle">Ingredients: </div>
     <div class="ingredientsDiv">
     </div>
     <div class="productsDiv">

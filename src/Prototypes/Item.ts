@@ -3,7 +3,8 @@ import globals from "../globals";
 import ItemProps from "../NodeGen/instances/Item";
 import Util from "../Util";
 import { ItemGeneric, ItemGenericConstructor } from "./Base/ItemGeneric";
-import { Recipe, RecipeConstructor } from "./Recipe";
+import { RecipeConstructor } from "./Base/RecipeGeneric";
+import { RecipeItem } from "./ItemRecipe";
 
 export interface ItemConstructor extends ItemGenericConstructor {
   description?: string
@@ -15,16 +16,16 @@ export interface itemElementsInterface {
   icon?: HTMLImageElement
 }
 
-export class Item extends ItemGeneric {
+export class ItemPrototype extends ItemGeneric {
   description: string
-  recipe?: Recipe
+  recipe?: RecipeItem
   constructor(obj: ItemConstructor) {
     super(obj);
     this.description = obj.description || "";
-    globals.itemList.push(this)
+    globals.list.push(this)
 
     if(obj.recipe) {
-      let recipe = new Recipe({
+      let recipe = new RecipeItem({
         name: obj.recipe.name || this.name,
         id: obj.recipe.id || this.id,
         icon: obj.recipe.icon || this.icon,
@@ -36,7 +37,7 @@ export class Item extends ItemGeneric {
   }
 
   create() {
-    let item = new ItemInstance({
+    let item = new Item({
       name: this.name,
       id: this.id,
       description: this.description,
@@ -48,7 +49,7 @@ export class Item extends ItemGeneric {
   }
 }
 
-export class ItemInstance extends Item {
+export class Item extends ItemPrototype {
   htmlDiv: HTMLElement
   itemElements: itemElementsInterface = {}
 

@@ -1,9 +1,10 @@
 import Dispatcher from "./Dispatcher";
 import { Equipment, EquipmentInstance } from "./Prototypes/Equipment";
-import { Item, ItemInstance } from "./Prototypes/Item";
-import { Recipe } from "./Prototypes/Recipe";
+import { Item } from "./Prototypes/Item";
+// import { Recipe } from "./Prototypes/Base/RecipeGeneric";
 import { Resource } from "./Prototypes/Resource"
 import Util from "./Util";
+import { ItemGeneric } from "./Prototypes/Base/ItemGeneric";
 
 enum loadingType {
   resources, inventory, crafting
@@ -13,13 +14,9 @@ interface globalsInterface {
   Loader: (type: loadingType) => void
   InventoryFirstClickChecker: () => void
   resourceContainer: HTMLElement | null
-  resourceList: Resource[]
+  list: ItemGeneric[]
+  inventoryList: ItemGeneric[]
 
-  itemList: (Item | Equipment)[]
-  recipeList: Recipe[]
-
-
-  inventoryList: (ItemInstance | EquipmentInstance)[],
   inventoryListContainer: HTMLElement | null,
   inventoryDescElements: {
     name: HTMLElement | null
@@ -33,12 +30,10 @@ interface globalsInterface {
 
 let globals: globalsInterface = {
   Dispatcher,
+  inventoryList: [],
 
   resourceContainer: null,
-  resourceList: [],
-  itemList: [],
-  inventoryList: [],
-  recipeList: [],
+  list: [],
   inventoryListContainer: null,
   inventoryDescElements: {
     name: null,
@@ -46,20 +41,33 @@ let globals: globalsInterface = {
     icon: null,
     extra: null
   },
-  Loader(type) {
+  Loader() {
     let inventoryListChildren = [...this.inventoryListContainer!.children]
-    switch (type) {
-      case 0:
-        this.resourceList.forEach(resource => this.resourceContainer!.appendChild(resource.htmlDiv))
-        break;
-      case 1:
-        inventoryListChildren.forEach(child => child.remove())
-        this.inventoryList.forEach(equipment => this.inventoryListContainer!.appendChild(equipment.htmlDiv))
-        break;
-      case 2:
-        inventoryListChildren.forEach(child => child.remove())
-        this.recipeList.forEach(recipe => this.inventoryListContainer!.appendChild(recipe.htmlDiv))
+    for(const item of this.list) {
+      switch (item.constructor.name) {
+        case "ItemPrototype":
+          this.resourceContainer!.appendChild((item as Item).htmlDiv)
+          break;
+        case "EquipmentPrototype":
+          inventoryListChildren.forEach(child => child.remove())
+          this.inventoryListContainer!.appendChild((item as Equipment).htmlDiv)
+        case "ResourcePrototype":
+          inventoryListChildren.forEach(child => child.remove())
+          this.inventoryListContainer!.appendChild((item as Resource).htmlDiv)
       }
+    }
+    // switch (type) {
+    //   case 0:
+    //     this.resourceList.forEach(resource => this.resourceContainer!.appendChild(resource.htmlDiv))
+    //     break;
+    //   case 1:
+    //     inventoryListChildren.forEach(child => child.remove())
+    //     this.inventoryList.forEach(equipment => this.inventoryListContainer!.appendChild(equipment.htmlDiv))
+    //     break;
+    //   case 2:
+    //     inventoryListChildren.forEach(child => child.remove())
+    //     this.recipeList.forEach(recipe => this.inventoryListContainer!.appendChild(recipe.htmlDiv))
+    //   }
     },
   InventoryFirstClickChecker() {
     if(this.hasNotClickedInventoryItem) {
@@ -74,16 +82,28 @@ let globals: globalsInterface = {
 }
 setInterval(() => {
   let prev: number, current: number;
-  globals.resourceList.forEach(res => {
-    if(res.isCountable) {
-      prev = res.count!
+  for(const item of globals.list) {
+    if(item.constructor.name === "Resource") {
+      if(item.isCountable) {
+      prev = item.count!
       setTimeout(() => {
-        current = res.count!
-        res.pps = (current - prev) / 2;
-        res.updateUI()
+        current = item.count!;
+        (item as Resource).pps = (current - prev) / 2;
+        (item as Resource).updateUI()
       }, 1000);
     }
-  })
+    }
+  }
+  // globals.resourceList.forEach(res => {
+  //   if(res.isCountable) {
+  //     prev = res.count!
+  //     setTimeout(() => {
+  //       current = res.count!
+  //       res.pps = (current - prev) / 2;
+  //       res.updateUI()
+  //     }, 1000);
+  //   }
+  // })
 }, 2000);
 
 

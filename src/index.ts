@@ -15,12 +15,12 @@ let res1 = new Prototypes.Resource({
 let item2 = new Prototypes.Item({
   name: "Drill",
   id: "drill1",
-  isCountable: false,
+  isCountable: true,
   icon: '/svg/drill.svg',
   description: "An automated tool for mining. Very convenient eh?",
   recipe: {
     ingredients: ['pickaxe1', 'wood'],
-    results: []
+    results: ["drill1"]
   }
 })
 
@@ -33,10 +33,8 @@ let item1 = new Prototypes.Equipment({
   description: "A state of the art tool for the excavation of goods",
   maxDurability: 100,
   recipe: {
-    name: "Stone pickaxe",
-    id: "pickaxe1",
-    ingredients: ['wood', 'drill1'],
-    results: []
+    ingredients: ["wood"],
+    results: ["pickaxe1"]
   }
 })
 

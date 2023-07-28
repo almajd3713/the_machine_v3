@@ -72,18 +72,29 @@
             filter: var(--color-1-filter);
           }
         }
-        .details {
-          margin-bottom: 2rem;
-          .name {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-          }
-          .description {
-            font-size: 1.75rem;
-          }
-        }
         .extra {
           font-size: 1.5rem;
+          .details {
+            margin-bottom: 2rem;
+            .name {
+              font-size: 3rem;
+              margin-bottom: 2rem;
+            }
+            .description {
+              font-size: 1.75rem;
+            }
+          }
+          .craftingCont {
+            font-size: 2.5rem;
+            .ingredientsDiv {
+              margin-top: 1rem;
+              font-size: 2rem;
+              * {
+                margin-bottom: .5rem;
+              }
+            }
+          @include button(#444, #ccc);
+          }
         }
       }
     }

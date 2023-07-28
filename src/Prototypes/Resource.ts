@@ -51,7 +51,7 @@ export class Resource extends ItemGeneric {
         this.generate()
       })
     }
-    globals.resourceList.push(this)
+    globals.list.push(this)
   }
   private initHTML() {
     this.htmlElements = {
